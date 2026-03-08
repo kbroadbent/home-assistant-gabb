@@ -1,0 +1,40 @@
+{
+  "options": {
+    "step": {
+      "init": {
+        "title": "Gabb Options",
+        "data": {
+          "update_interval": "Update interval (seconds)"
+        }
+      }
+    }
+  },
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Gabb",
+        "description": "Enter your Gabb account credentials.",
+        "data": {
+          "username": "Email",
+          "password": "Password"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-authenticate with Gabb",
+        "description": "Your Gabb credentials for {username} are no longer valid. Please enter your new password.",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect to Gabb. Please check your network connection.",
+      "invalid_auth": "Invalid email or password.",
+      "unknown": "An unexpected error occurred."
+    },
+    "abort": {
+      "already_configured": "This Gabb account is already configured.",
+      "reauth_successful": "Re-authentication was successful."
+    }
+  }
+}
