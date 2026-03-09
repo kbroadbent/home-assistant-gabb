@@ -12,7 +12,7 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 
 from .api import GabbAPI
 from .const import CONF_UPDATE_INTERVAL, DEFAULT_UPDATE_INTERVAL, DOMAIN
-from .exceptions import GabbAuthError, GabbConnectionError, GabbError
+from .exceptions import GabbAuthError, GabbConnectionError
 from .models import GabbCoordinatorData
 
 _LOGGER = logging.getLogger(__name__)
@@ -52,10 +52,6 @@ class GabbDataUpdateCoordinator(DataUpdateCoordinator[GabbCoordinatorData]):
             except GabbAuthError as err:
                 raise ConfigEntryAuthFailed(
                     f"Authentication failed: {err}"
-                ) from err
-            except GabbError as err:
-                raise UpdateFailed(
-                    f"Error during reauth/retry: {err}"
                 ) from err
         except GabbConnectionError as err:
             raise UpdateFailed(f"Connection error: {err}") from err

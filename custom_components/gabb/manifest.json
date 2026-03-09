@@ -5,6 +5,7 @@
   "config_flow": true,
   "dependencies": [],
   "documentation": "https://github.com/kbroadbent/home-assistant-gabb",
+  "issue_tracker": "https://github.com/kbroadbent/home-assistant-gabb/issues",
   "iot_class": "cloud_polling",
   "requirements": ["aiohttp>=3.9.0"],
   "version": "0.1.0"
