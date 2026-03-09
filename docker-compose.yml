@@ -1,0 +1,12 @@
+services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: ha-gabb-dev
+    volumes:
+      - ./ha-config:/config
+      - ./custom_components/gabb:/config/custom_components/gabb:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "8123:8123"
+    restart: unless-stopped
+    privileged: true
