@@ -2,6 +2,8 @@
 
 A Home Assistant custom integration for monitoring [Gabb](https://www.gabb.com/) children's devices (watches and phones).
 
+> **Disclaimer:** This is an unofficial integration and is not affiliated with or endorsed by Gabb Wireless. It relies on undocumented, private APIs that may change at any time without notice. Use at your own risk — interacting directly with these APIs may produce unexpected results.
+
 ## Features
 
 - **GPS Device Tracking**: Track device locations in real-time with accuracy, altitude, and speed attributes
@@ -50,6 +52,58 @@ Each Gabb device gets a GPS tracker entity with:
 
 ### Battery Sensor
 Each Gabb device gets a battery level sensor (percentage).
+
+---
+
+## Development
+
+### Local Home Assistant
+
+```bash
+# Start Home Assistant with the integration mounted
+docker compose up
+
+# Open http://localhost:8123
+```
+
+### Smoke Test (no HA required)
+
+```bash
+python smoke_test.py
+```
+
+Prompts for Gabb credentials, calls the API directly, and prints device info (coordinates, battery, names, IMEI). Useful for verifying credentials and API connectivity without a full HA setup.
+
+### Tests
+
+There are no automated tests yet. The smoke test is the primary validation tool.
+
+### Project Structure
+
+```
+home-assistant-gabb/
+├── custom_components/gabb/
+│   ├── __init__.py          # Integration setup, platform registration
+│   ├── api.py               # Async API client (aiohttp)
+│   ├── config_flow.py       # Setup UI, reauth, and options flow
+│   ├── coordinator.py       # DataUpdateCoordinator (polling)
+│   ├── const.py             # Constants, API URLs, hardcoded tokens
+│   ├── models.py            # GabbDeviceInfo, GabbDeviceData, GabbCoordinatorData
+│   ├── entity.py            # GabbBaseEntity base class
+│   ├── sensor.py            # Battery sensor (%)
+│   ├── device_tracker.py    # GPS tracker (lat/lon/accuracy)
+│   ├── exceptions.py        # GabbError → GabbAuthError, GabbConnectionError, GabbAPIError
+│   ├── diagnostics.py       # Redacted diagnostics export
+│   ├── manifest.json        # Integration metadata
+│   ├── strings.json         # UI strings
+│   └── translations/en.json # English translations
+├── brand/                   # Integration icon
+├── .github/workflows/       # CI/CD (HACS validation, hassfest)
+├── docker-compose.yml       # Dev HA container (port 8123)
+└── smoke_test.py            # Standalone API test script
+```
+
+---
 
 ## Support
 
