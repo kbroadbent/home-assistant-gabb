@@ -76,7 +76,17 @@ Prompts for Gabb credentials, calls the API directly, and prints device info (co
 
 ### Tests
 
-There are no automated tests yet. The smoke test is the primary validation tool.
+```bash
+pip install -r requirements-test.txt
+pytest
+```
+
+Run with coverage:
+
+```bash
+pip install pytest-cov
+pytest --cov=custom_components/gabb --cov-report=term-missing
+```
 
 ### Project Structure
 
@@ -97,9 +107,11 @@ home-assistant-gabb/
 │   ├── manifest.json        # Integration metadata
 │   ├── strings.json         # UI strings
 │   └── translations/en.json # English translations
+├── tests/                   # pytest test suite
 ├── brand/                   # Integration icon
 ├── .github/workflows/       # CI/CD (HACS validation, hassfest)
 ├── docker-compose.yml       # Dev HA container (port 8123)
+├── requirements-test.txt    # Test dependencies
 └── smoke_test.py            # Standalone API test script
 ```
 
